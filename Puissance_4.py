@@ -11,12 +11,12 @@
 
 # grille temporaire pour faire les tests
 g = [
-     [0, 0, 0, 0, 0, 1, 0],
-     [0, 0, 0, 0, 1, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0],
      [0, 0, 0, 1, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 1, 0, 0],
+     [0, 0, 0, 0, 0, 1, 0],
+     [0, 0, 0, 0, 0, 0, 1],
      ]
 
 # l --> ligne (valeur entre 0 et 5)
@@ -137,27 +137,32 @@ def diag(g,j,l,c):
             l_prime-=1
             c_prime+=1
             
-            if g[l_prime][c_prime] == j:
-                total+=1
-            else:
+            if l_prime >5 or c_prime >6 or l_prime < 0 or c_prime <0:
                 break
+            else:
+                if g[l_prime][c_prime] == j:
+                    total+=1
+                else:
+                    break
                 
         if total >=4:
             return True
-        else:
+
             
-            l_prime = l
-            c_prime = c
+        l_prime = l
+        c_prime = c
+        
+        for i in range(3):
+            if total >=4:
+                break # On casse la boucle de 3 si total est supérieur à 4
+                        # On évite les potentielles erreurs en sortant de la liste
             
+            l_prime+=1
+            c_prime-=1
             
-            for i in range(3):
-                if total >=4:
-                    break # On casse la boucle de 3 si total est supérieur à 4
-                          # On évite les potentielles erreurs en sortant de la liste
-                
-                l_prime+=1
-                c_prime-=1
-                
+            if l_prime >5 or c_prime >6 or l_prime < 0 or c_prime <0:
+                break
+            else:
                 if g[l_prime][c_prime] == j:
                     total+=1
                 else:
@@ -165,11 +170,55 @@ def diag(g,j,l,c):
             
             if total >=4:
                 return True
+        
+        total = 1
+
+        for i in range(3):
+            if total >=4:
+                break
+
+            l_prime-=1
+            c_prime-=1
+
+            if l_prime >5 or c_prime >6 or l_prime < 0 or c_prime <0:
+                break
             else:
-                return False
+                if g[l_prime][c_prime] == j:
+                    total+=1
+                else:
+                    break
+            
+            if total >=4:
+                return True
+
+        for i in range(3):
+            if total >=4:
+                break # On casse la boucle de 3 si total est supérieur à 4
+                        # On évite les potentielles erreurs en sortant de la liste
+            
+            l_prime+=1
+            c_prime+=1
+            
+            if l_prime >5 or c_prime >6 or l_prime < 0 or c_prime <0:
+                break
+            else:
+                if g[l_prime][c_prime] == j:
+                    total+=1
+                else:
+                    break
+            
+        if total >=4:
+            return True
+        else:
+            return False
+
+
+
+
     else:
         return False
     
+# en bas à gauche - en haut à droite
 # g[5][0]
 # g[4][1]
 # g[3][2]
@@ -177,9 +226,18 @@ def diag(g,j,l,c):
 # g[1][4]
 # g[0][5]
 
-affiche(g)
+# en bas à droite - en haut à gauche
+# g[5][6]
+# g[4][5]
+# g[3][4]
+# g[2][3]
+# g[1][2]
+# g[0][1]
 
-def victoire(g,j):
+affiche(g)
+print(diag(g, 1, 5,6))
+
+# def victoire(g,j):  
     
 
 def match_nul(g):
