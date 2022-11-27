@@ -291,11 +291,13 @@ def coup_aleatoire(g, j):
 #   | Joueur contre ordinateur |
 #   | ------------------------ |
 
+# Le programme empêche les erreurs lorsque l'on entre des colonnes inexistantes
 
 # Nathan et Julien
 def main():
     player = 1
     bot = 2
+    colonne = 10 
     
     affiche(g)
     
@@ -313,9 +315,12 @@ def main():
         affiche(g)
         win = bot
         victoire(g, win)
-        match_nul(g) 
+        match_nul(g)
+        
         # On fait jouer une première fois le joueur ici pour éviter des coups d'affilés plus tard
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+        while colonne >7:
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
@@ -324,7 +329,9 @@ def main():
         match_nul(g) 
     else:
         affiche(g)
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+        while colonne >7:
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
@@ -339,8 +346,10 @@ def main():
         win = bot
         victoire(g, win)
         match_nul(g) 
-
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+        colonne = 10
+        while colonne >7:
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
