@@ -58,10 +58,10 @@ def affiche(g):
 
 # Reian
 def coup_possible(g, c): # c doit etre l'index
-    if g[0][c] == 0:
-        return True
-    else:
+    if c >7 or c <0:
         return False
+    if g[0][c] == 0: return True
+    else: return False
 
 # Chayan
 def jouer(g, j, c): # c doit etre l'index
@@ -264,15 +264,10 @@ def victoire(g, j):
     
 # Chayan
 def match_nul(g):
-    total=0
     for c in range(7):
-        if g[0][c] == 1 or 2:
-            total+=1
-
-    if total == 7:
+        if g[0][c] == 0:
+            return False
         return True
-    else:
-        return False
 
 # Chayan
 def coup_aleatoire(g, j):
@@ -316,10 +311,10 @@ def main():
         match_nul(g)
         
         # On fait jouer une première fois le joueur ici pour éviter des coups d'affilés plus tard
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7 and coup_possible(g, colonne-1):
+        colonne = int(input("Dans quelle colonne souhaitez-vous jouer ? "))
+        while colonne >7 or colonne <0 and coup_possible(g, colonne-1) == False:
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
-            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            colonne = int(input("Dans quelle colonne souhaitez-vous jouer ? "))
             
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
@@ -329,8 +324,8 @@ def main():
         match_nul(g) 
     else:
         affiche(g)
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7 and coup_possible(g, colonne-1):
+        colonne = int(input("Dans quelle colonne souhaitez-vous jouer ? "))
+        while colonne >7 or colonne <0 and coup_possible(g, colonne-1) ==  False:
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
             colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             
@@ -341,25 +336,29 @@ def main():
         victoire(g, win)
         match_nul(g) 
     
-    while match_nul(g) != True or victoire(g, win) != True:
+    while True:
 
         coup_aleatoire(g, bot)
         affiche(g)
         win = bot
-        victoire(g, win)
-        match_nul(g) 
+        if victoire(g, win) == True:
+            break
+        if match_nul(g) == True:
+            break  
         colonne = 10
-        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7 and coup_possible(g, colonne-1):
+        colonne = int(input("Dans quelle colonne souhaitez-vous jouer ? "))
+        while colonne >7 or colonne <0 and coup_possible(g, colonne-1) == False:
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
-            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            colonne = int(input("Dans quelle colonne souhaitez-vous jouer ? "))
             
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
         win = player
-        victoire(g, win)
-        match_nul(g)      
+        if victoire(g, win) == True:
+            break
+        if match_nul(g) == True:
+            break     
     
     if win == player:
         print("Bravo !!! Vous avez gagné !")    
@@ -379,26 +378,30 @@ def main_2():
     affiche(g)
     win = joueur_1 # On déclare la variable (joueur_1 par défaut, ne change pas grand chose au programme)
     
-    while match_nul(g) != True or victoire(g, win) != True:
+    while True:
 
         coup_aleatoire(g, joueur_1)
         affiche(g)
         win = joueur_1
-        victoire(g, win)
-        match_nul(g) 
+        if victoire(g, win) == True:
+            break
+        if match_nul(g) == True:
+            break 
         
         coup_aleatoire(g, joueur_2)
         affiche(g)
         win = joueur_2
-        victoire(g, win)
-        match_nul(g)      
+        if victoire(g, win) == True:
+            break
+        if match_nul(g) == True:
+            break     
     
     print(f"Le joueur {win} a gagné ! ")  
 
 
-
 main()
-# main_2() 
+#main_2()
+
         
     
     
