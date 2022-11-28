@@ -318,9 +318,11 @@ def main():
         match_nul(g)
         
         # On fait jouer une première fois le joueur ici pour éviter des coups d'affilés plus tard
+        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
         while colonne >7:
-            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
@@ -329,9 +331,11 @@ def main():
         match_nul(g) 
     else:
         affiche(g)
+        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
         while colonne >7:
-            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
@@ -347,9 +351,11 @@ def main():
         victoire(g, win)
         match_nul(g) 
         colonne = 10
+        colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
         while colonne >7:
-            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
+            colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
+            
         colonne-=1 # car les fonctions prennent en paramètre l'index
         jouer(g, player, colonne)
         affiche(g)
