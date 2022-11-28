@@ -14,16 +14,14 @@
 
 from random import randint
 
-# g --> grille principale qui va evoluer en fonction de la partie 
-g = [[0 for c in range(7)] for l in range(6)]
 
 # grille temporaire pour faire les tests
 # g = [
-#      [0, 0, 0, 0, 0, 0, 0],
-#      [0, 0, 0, 0, 0, 0, 0],
+#      [1, 2, 1, 2, 2, 1, 1],
+#      [0, 0, 0, 0, 1, 0, 0],
 #      [0, 0, 0, 1, 0, 0, 0],
 #      [0, 0, 0, 0, 1, 0, 0],
-#      [0, 0, 0, 0, 0, 1, 0],
+#      [0, 0, 0, 0, 0, 0, 0],
 #      [0, 0, 0, 0, 0, 0, 1],
 #      ]
 
@@ -35,7 +33,7 @@ g = [[0 for c in range(7)] for l in range(6)]
 # 1 --> X
 # 2 --> O
 
-# Affiche la grille vide
+# Créer la grille vide
 def grille_vide():
     return [[0 for c in range(7)] for l in range(6)]
 
@@ -68,11 +66,10 @@ def coup_possible(g, c): # c doit etre l'index
 # Chayan
 def jouer(g, j, c): # c doit etre l'index
     max = 0
-    if coup_possible(g, c) == True:
-        for l in range(len(g)):
-            if g[l][c] == 0:
-                max = l
-        g[max][c] = j
+    for l in range(len(g)):
+        if g[l][c] == 0:
+            max = l
+    g[max][c] = j
 
 # Julien
 def horiz(g, j, l, c):
@@ -280,9 +277,9 @@ def match_nul(g):
 # Chayan
 def coup_aleatoire(g, j):
     while True:
-        colonne = randint(0, 6)
-        if coup_possible(g, colonne):
-            jouer(g, j, colonne)
+        c = randint(0, 6)
+        if coup_possible(g, c):
+            jouer(g, j, c)
             return 
 
 
@@ -295,6 +292,7 @@ def coup_aleatoire(g, j):
 
 # Nathan et Julien
 def main():
+    g = grille_vide()
     player = 1
     bot = 2
     colonne = 10 
@@ -319,7 +317,7 @@ def main():
         
         # On fait jouer une première fois le joueur ici pour éviter des coups d'affilés plus tard
         colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7:
+        while colonne >7 and coup_possible(g, colonne-1):
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
             colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             
@@ -332,7 +330,7 @@ def main():
     else:
         affiche(g)
         colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7:
+        while colonne >7 and coup_possible(g, colonne-1):
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
             colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             
@@ -352,7 +350,7 @@ def main():
         match_nul(g) 
         colonne = 10
         colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
-        while colonne >7:
+        while colonne >7 and coup_possible(g, colonne-1):
             print("Il semblerait que vous essayez de jouer dans une colonne inexistante...")
             colonne = int(input("Dans quel colonne souhaitez-vous jouer ? "))
             
@@ -365,14 +363,16 @@ def main():
     
     if win == player:
         print("Bravo !!! Vous avez gagné !")    
-    elif match_nul(g):
-        print("Vous avez fait égalité...")  
+    elif win == bot:
+        print("Quel dommage, vous avez perdu... Vous ferez mieux la prochaine fois")  
     else:
-        print("Quel dommage, vous avez perdu... Vous ferez mieux la prochaine fois")
+        print("Vous avez fait égalité...")
+        
 
 
 # Reian
 def main_2():
+    g = grille_vide()
     joueur_1 = 1
     joueur_2 = 2
     
