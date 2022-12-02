@@ -37,7 +37,6 @@ from random import randint
 def grille_vide():
     return [[0 for c in range(7)] for l in range(6)]
 
-# Nathan
 def affiche(g):
     print() # Permet de sauter une ligne (+ propre visuellement parlant)
     # On remplace les valeurs par qqch de plus graphique
@@ -56,14 +55,12 @@ def affiche(g):
                 print("  O", end='')
         print("\n")
 
-# Reian
 def coup_possible(g, c): # c doit etre l'index
     if c >7 or c <0:
         return False
     if g[0][c] == 0: return True
     else: return False
 
-# Chayan
 def jouer(g, j, c): # c doit etre l'index
     max = 0
     for l in range(len(g)):
@@ -71,7 +68,6 @@ def jouer(g, j, c): # c doit etre l'index
             max = l
     g[max][c] = j
 
-# Julien
 def horiz(g, j, l, c):
     if g[l][c] ==j:
         
@@ -103,8 +99,7 @@ def horiz(g, j, l, c):
                 return False
     else:
         return False              
-
-# Julien
+     
 def vert(g, j, l, c):
     if g[l][c] ==j:
         
@@ -137,7 +132,6 @@ def vert(g, j, l, c):
     else:
         return False
 
-# Julien
 def diag(g, j, l, c):
     if g[l][c] ==j:
         
@@ -254,7 +248,6 @@ def diag(g, j, l, c):
 # g[0][1]
 
 
-#Reian 
 def victoire(g, j): 
     for l in range(len(g)):
         for c in range(len(g[l])):
@@ -262,14 +255,12 @@ def victoire(g, j):
                 return True
     return False
     
-# Chayan
 def match_nul(g):
     for c in range(7):
         if g[0][c] == 0:
             return False
         return True
 
-# Chayan
 def coup_aleatoire(g, j):
     while True:
         c = randint(0, 6)
@@ -285,7 +276,6 @@ def coup_aleatoire(g, j):
 
 # Le programme empêche les erreurs lorsque l'on entre des colonnes inexistantes
 
-# Nathan et Julien
 def main():
     g = grille_vide()
     player = 1
@@ -368,8 +358,6 @@ def main():
         print("Vous avez fait égalité...")
         
 
-
-# Reian
 def main_2():
     g = grille_vide()
     joueur_1 = 1
