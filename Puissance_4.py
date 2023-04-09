@@ -1,15 +1,7 @@
 '''
- Duo: Nathan, Julien
- Quatuor: Nathan, Julien, Reian, Chayan
  Certaines parties possèdent des bouts de codes qui sont utilitaires 
  (meilleure visualisation graphique) ou nécessaires pour faire les tests
- 
- Note que chacun se donne:
- - Julien (5/5)
- - Nathan (3/5)
- - Reian (4/5)
- - Chayan (3/5)
- 
+
 '''
 
 from random import randint
